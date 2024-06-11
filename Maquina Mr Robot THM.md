@@ -2,7 +2,7 @@
 --- 
 A primera vista esta maquina no nos da mucha información **visible** en la web, ya os aviso que no tenemos que hacer nada en la web ,sino que vamos a juanquear internamente
 
-![Image](1foto.png)
+![Image]1foto.png(https://github.com/shell-bomb/CTFs/blob/main/Imagenes/1foto.png)
 
 ## NMAP
 Si realizamos un nmap basico a esta maquina observamos que nos da **3** puertos, Puerto FTP, puerto HTTP y HTTPS
@@ -74,29 +74,31 @@ De directorios interesantes encontramos:
 
 # 1º Flag
 ----
-Examinamos el fichero `/robots.txt` y encontramos una ruta a la 1º flag 
-![[Pasted image 20221115164902.png]]
+Examinamos el fichero `/robots.txt` y encontramos una ruta a la 1º flag
+![Pasted image 20221115164902.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115164902.png)
 
 ---
-![[Pasted image 20221115165022.png]]
+![Pasted image 20221115165022.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115165022.png)
+
 1º Flag = 073403c8a58a1f80d943455fb30724b9
 
 ## Explotacion 1.0
 
 Examinamos el directorio /license y encontramos algo interesante
-![[Pasted image 20221115160421.png]]
+![Pasted image 20221115160421.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115160421.png)
 # Explotación 2.0
 ---
-Encontramos un codigo "cifrado" en base 64 que cuando desciframos obtenemos
-![[Pasted image 20221115160802.png]]
-que las credenciales del usuario son:
+Encontramos un codigo "cifrado" en base 64 que cuando desciframos obtenemos que las credenciales del usuario son:
+
+![Pasted image 20221115160802.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115160802.png)
+
 1. elliot
 2. ER28-0652
 Asi que regresamos al panel de login de wordpress e introducimos las claves que nos han dado y....
 
 ENTRAMOS!!!
 
-![[Pasted image 20221115161354.png]]
+![Pasted image 20221115161354.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115161354.png)
 
 ## Explotación wordpress via PHP-revershe shell
 
@@ -110,7 +112,7 @@ En mi caso mi puerto es 4444 y mi IP es XX.XX.XX.XX (poned la IP de tun0 VPN)
 
 
 
-![[Pasted image 20221115170810.png]]
+![Pasted image 20221115170810.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115170810.png)
 Actualizamos el archivo y seguidamente para activar la reverse shell tenemos que apuntar directamente a la palntilla, apuntando a la URL http://10.10.92.13/wp-content/themes/twentyfifteen/404.php para que el php ejecute el codigo de dentro.
 
 ~~~bash
@@ -125,7 +127,8 @@ uid=1(daemon) gid=1(daemon) groups=1(daemon)
 $ 
 ~~~
 BAM! Tenemos shell
-![[Pasted image 20221115172126.png]]
+
+![Pasted image 20221115172126.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115172126.png)
 
 # Explotación, Flag2 y 3
 ---
@@ -137,13 +140,18 @@ daemon@linux:/home/robot$ cat password.raw-md5
 cat password.raw-md5
 robot:c3fcd3d76192e4007dfb496cca67e13b
 ~~~~
+
 Introducimos el hash MD5 en internet y nos aparece
-![[Pasted image 20221115173155.png]]
+
+![Pasted image 20221115173155.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115173155.png)
+
 En resumen: 
 - User: robot
 - Pass: abcdefghijklmnopqrstuvwxyz
-Realizamos un SU robot para tener permisos SUDO, ahora si que podemos hacer un cat de la flag 
-![[Pasted image 20221115173835.png]]
+Realizamos un SU robot para tener permisos SUDO, ahora si que podemos hacer un cat de la flag
+
+![Pasted image 20221115173835.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115173835.png)
+
 # Privesc y Flag3
 
 Para escalar privilegios primero miramos que comandos y tools podemos ejecutar, mediante este comando
@@ -180,8 +188,10 @@ QUITTING!
 
 Hay una vulnerabilidad en la version de Nmap qeu nos permite generar una sesion de sh asi que 
 ejecutando el comando `nmap --interactive` seguido de `!sh` para generarnos el entorno
-Cambiamos al directorio `/root` 
-![[Pasted image 20221115175025.png]]
+Cambiamos al directorio `/root`
+
+![Pasted image 20221115175025.png](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/Pasted%20image%2020221115175025.png)
+
 Y ya tenemos la FLAG!!!
 Espero que os haya gustado este primer post, teneis por aqui mis redes sociales.
 [Linkedin](https://www.linkedin.com/in/marco-carrasco-talan-6b5912198/)
