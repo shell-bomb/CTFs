@@ -2,7 +2,7 @@
 --- 
 A primera vista esta maquina no nos da mucha información **visible** en la web, ya os aviso que no tenemos que hacer nada en la web ,sino que vamos a juanquear internamente
 
-![Image]1foto.png(https://github.com/shell-bomb/CTFs/blob/main/Imagenes/1foto.png)
+![Image](https://github.com/shell-bomb/CTFs/blob/main/Imagenes/1foto.png)
 
 ## NMAP
 Si realizamos un nmap basico a esta maquina observamos que nos da **3** puertos, Puerto FTP, puerto HTTP y HTTPS
